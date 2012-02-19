@@ -7,7 +7,7 @@ card_y = 80; //original 80
 card_space = 2; //original 2
 wall_thickness = 2; //original 2
 plate_height = 2; //original 2
-wall_height = 10;
+wall_height = 12; //original 12
 shortwall_cut = card_x/(card_y/card_x);
 shortwall = (card_x-shortwall_cut)/2+wall_thickness+card_space/2;
 
@@ -32,9 +32,9 @@ union() {
 		//Round Cut
 		// was made with a cylinder with radius=32 scaled in x and y by 0.8, resulting in R=25.6 and that is aprox card_x
 		translate([0,card_y/1.27,-card_x/4])
-		cylinder(card_x/2, card_x/2, card_x/2);
+		cylinder(card_x/2, card_x/2, card_x/2, $fa=2);
 		translate([0,-card_y/1.27,-card_x/4])
-		cylinder(card_x/2, card_x/2, card_x/2);
+		cylinder(card_x/2, card_x/2, card_x/2, $fa=2);
 		
 		//female con
 		translate( [ (card_x/2) - female_con_x + card_space/2 + wall_thickness +0.01 , -female_con_y1/2, -plate_height ] ) //0.01 is for overlapping
