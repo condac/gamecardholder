@@ -50,9 +50,18 @@ difference() {
 }
 
 union() {
-	//Base plate
-	cube(size = [card_x+card_space+wall_thickness*2, card_y+card_space+wall_thickness*2,plate_height], center = true);
-	
+
+	difference() {
+		//Base plate
+		cube(size = [card_x+card_space+wall_thickness*2, card_y+card_space+wall_thickness*2,plate_height], center = true);
+		//Round Cut
+		// was made with a cylinder with radius=32 scaled in x and y by 0.8, resulting in R=25.6 and that is aprox card_x
+		translate([0,card_y/1.27,-card_x/4])
+		cylinder(card_x/2, card_x/2, card_x/2);
+		translate([0,-card_y/1.27,-card_x/4])
+		cylinder(card_x/2, card_x/2, card_x/2);
+	}
+
 	//Cards for reference
 	//%cube(size = [card_x,card_y,9], center = true);
 	//%cube(size = [card_y,card_x,9], center = true);
@@ -103,8 +112,5 @@ union() {
 	rotate([0,0,90])
 	cube(size = [wall_thickness, shortwall , wall_height] ,center = false);
 	
-	//Round Cut
-	// was made with a cylinder with radius=32 scaled in x and y by 0.8, resulting in R=25.6
-	translate([0,card_y,0])
-	cylinder(25.6, 25.6, 25.6);
+
 }
