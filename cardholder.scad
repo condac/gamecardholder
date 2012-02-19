@@ -24,7 +24,6 @@ male_con_y2 = 10.46;
 angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x ); // same for both
 
 
-
 union() {
 
 	difference() {
@@ -44,8 +43,8 @@ union() {
 			translate( [ 0,female_con_y1,-1 ] )
 			rotate([0, 0, -angle])
 			cube(female_con_x*2);
-			translate( [ 0,-female_con_x*2,-1 ] )
-			rotate([0, 0, angle])
+			translate( [ 0,0,-1 ] )
+			rotate([0, 0, angle-90])
 			cube(female_con_x*2);
 		}
 
@@ -58,8 +57,8 @@ union() {
 		translate( [ 0,male_con_y1,-1 ] )
 		rotate([0, 0, -angle])
 		cube(male_con_x*2);
-		translate( [ 0,-male_con_x*2,-1 ] )
-		rotate([0, 0, angle])
+		translate( [ 0,0,-1 ] )
+		rotate([0, 0, angle-90])
 		cube(male_con_x*2);
 	}
 
