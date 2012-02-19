@@ -22,14 +22,42 @@ male_con_x = 11.4;
 male_con_y1 = 19.8;
 male_con_y2 = 10.46;
 
+//female con
+angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x );
+color("blue")
+translate( [ (card_x/2) - female_con_x + card_space/2 + wall_thickness +0.01 , -female_con_y1/2, -plate_height ] ) //0.01 is for overlapping
+difference() {
+	cube(size = [female_con_x, female_con_y1, plate_height*2], center = false);
+	translate( [ 0,female_con_y1,-1 ] )
+	rotate([0, 0, -angle])
+	cube(female_con_x*2);
+	translate( [ 0,-female_con_x*2,-1 ] )
+	rotate([0, 0, angle])
+	cube(female_con_x*2);
+}
+//male con
+angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x ); // same as female
+
+translate( [ -(card_x/2) - card_space/2 - wall_thickness - male_con_x, -male_con_y1/2, -plate_height/2 ] ) 
+difference() {
+	cube(size = [male_con_x, male_con_y1, plate_height], center = false);
+	translate( [ 0,male_con_y1,-1 ] )
+	rotate([0, 0, -angle])
+	cube(male_con_x*2);
+	translate( [ 0,-male_con_x*2,-1 ] )
+	rotate([0, 0, angle])
+	cube(male_con_x*2);
+}
+
+
 //Base plate
 cube(size = [card_x+card_space+wall_thickness*2, card_y+card_space+wall_thickness*2,plate_height], center = true);
 
 //Cards for reference
-%cube(size = [card_x,card_y,9], center = true);
-%cube(size = [card_y,card_x,9], center = true);
+//%cube(size = [card_x,card_y,9], center = true);
+//%cube(size = [card_y,card_x,9], center = true);
 
-%cube(size= [shortwall_cut, 100,20], center = true);
+//%cube(size= [shortwall_cut, 100,20], center = true);
 
 // Long wall 1 of 4
 translate([  (card_x+card_space+wall_thickness*2)/2 , (card_y+card_space+wall_thickness*2)/2 ,plate_height/2])
