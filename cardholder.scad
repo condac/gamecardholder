@@ -8,7 +8,8 @@ card_space = 2; //original 2
 wall_thickness = 2; //original 2
 plate_height = 2; //original 2
 wall_height = 10;
-shortwall = card_x/(card_y/card_x);
+shortwall_cut = card_x/(card_y/card_x);
+shortwall = (card_x-shortwall_cut)/2+wall_thickness+card_space/2;
 
 //Connecting piece
 //the "female" part is 21mm at the biggest point and 12.5mm at the smallest and 10mm deep
@@ -28,7 +29,7 @@ cube(size = [card_x+card_space+wall_thickness*2, card_y+card_space+wall_thicknes
 %cube(size = [card_x,card_y,9], center = true);
 %cube(size = [card_y,card_x,9], center = true);
 
-%cube(size= [shortwall, 100,20], center = true);
+%cube(size= [shortwall_cut, 100,20], center = true);
 
 // Long wall 1 of 4
 translate([  (card_x+card_space+wall_thickness*2)/2 , (card_y+card_space+wall_thickness*2)/2 ,plate_height/2])
@@ -50,19 +51,32 @@ translate([  -(card_x+card_space+wall_thickness*2)/2 , -(card_y+card_space+wall_
 rotate([0,0,0])
 cube(size = [wall_thickness,(card_y-card_x)/2+wall_thickness+card_space/2,wall_height] ,center = false);
 
-//Shortwalls
+//Shortwall 1 of 4
 //the cut to make the space between the walls was originaly 37mm
-translate([  -(card_x+card_space+wall_thickness*2)/2 , -(card_y+card_space+wall_thickness*2)/2 ,plate_height/2])
-rotate([0,0,0])
-cube(size = [wall_thickness, shortwall, wall_height] ,center = false);
+translate([  -(card_x+card_space+wall_thickness*2)/2  , (card_y+card_space+wall_thickness*2)/2 ,plate_height/2])
+rotate([0,0,270])
+cube(size = [wall_thickness, shortwall , wall_height] ,center = false);
+
+//Shortwall 2 of 4
+//the cut to make the space between the walls was originaly 37mm
+translate([  (card_x+card_space+wall_thickness*2)/2 , -(card_y+card_space+wall_thickness*2)/2 ,plate_height/2])
+rotate([0,0,90])
+cube(size = [wall_thickness, shortwall , wall_height] ,center = false);
+
+//Shortwall 3 of 4
+//the cut to make the space between the walls was originaly 37mm
+translate([  -(card_x+card_space+wall_thickness*2)/2 , -(card_y+card_space+wall_thickness*2)/2 +wall_thickness ,plate_height/2])
+rotate([0,0,270])
+cube(size = [wall_thickness, shortwall , wall_height] ,center = false);
+
+//Shortwall 4 of 4
+//the cut to make the space between the walls was originaly 37mm
+translate([  (card_x+card_space+wall_thickness*2)/2 , (card_y+card_space+wall_thickness*2)/2 -wall_thickness ,plate_height/2])
+rotate([0,0,90])
+cube(size = [wall_thickness, shortwall , wall_height] ,center = false);
 
 //Round Cut
 // was made with a cylinder with radius=32 scaled in x and y by 0.8, resulting in R=25.6
 translate([0,card_y,0])
 cylinder(25.6, 25.6, 25.6);
 
-
-
-//Connecting piece
-//the "female" part is 21mm at the biggest point and 12.5mm at the smallest
-//the "male" part is 
