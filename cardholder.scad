@@ -1,3 +1,7 @@
+//Settlers game card holder
+// 1 to 1 copy of previous blender version but with parameters for changeing dimention
+
+//Constants
 card_x = 54;
 card_y = 80;
 card_space = 2;
@@ -5,8 +9,10 @@ wall_thickness = 3;
 plate_height = 3;
 wall_height = 10;
 
+//Base plate
 cube(size = [card_x+card_space+wall_thickness*2, card_y+card_space+wall_thickness*2,plate_height], center = true);
 
+//Cards for reference
 %cube(size = [card_x,card_y,9], center = true);
 %cube(size = [card_y,card_x,9], center = true);
 
