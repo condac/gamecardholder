@@ -21,33 +21,9 @@ female_con_y2 = 12.5;
 male_con_x = 11.4;
 male_con_y1 = 19.8;
 male_con_y2 = 10.46;
+angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x ); // same for both
 
-//female con
-angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x );
-color("blue")
-translate( [ (card_x/2) - female_con_x + card_space/2 + wall_thickness +0.01 , -female_con_y1/2, -plate_height ] ) //0.01 is for overlapping
-difference() {
-	cube(size = [female_con_x, female_con_y1, plate_height*2], center = false);
-	translate( [ 0,female_con_y1,-1 ] )
-	rotate([0, 0, -angle])
-	cube(female_con_x*2);
-	translate( [ 0,-female_con_x*2,-1 ] )
-	rotate([0, 0, angle])
-	cube(female_con_x*2);
-}
-//male con
-angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x ); // same as female
 
-translate( [ -(card_x/2) - card_space/2 - wall_thickness - male_con_x, -male_con_y1/2, -plate_height/2 ] ) 
-difference() {
-	cube(size = [male_con_x, male_con_y1, plate_height], center = false);
-	translate( [ 0,male_con_y1,-1 ] )
-	rotate([0, 0, -angle])
-	cube(male_con_x*2);
-	translate( [ 0,-male_con_x*2,-1 ] )
-	rotate([0, 0, angle])
-	cube(male_con_x*2);
-}
 
 union() {
 
@@ -60,6 +36,31 @@ union() {
 		cylinder(card_x/2, card_x/2, card_x/2);
 		translate([0,-card_y/1.27,-card_x/4])
 		cylinder(card_x/2, card_x/2, card_x/2);
+		
+		//female con
+		translate( [ (card_x/2) - female_con_x + card_space/2 + wall_thickness +0.01 , -female_con_y1/2, -plate_height ] ) //0.01 is for overlapping
+		difference() {
+			cube(size = [female_con_x, female_con_y1, plate_height*2], center = false);
+			translate( [ 0,female_con_y1,-1 ] )
+			rotate([0, 0, -angle])
+			cube(female_con_x*2);
+			translate( [ 0,-female_con_x*2,-1 ] )
+			rotate([0, 0, angle])
+			cube(female_con_x*2);
+		}
+
+	}
+
+	//male con
+	translate( [ -(card_x/2) - card_space/2 - wall_thickness - male_con_x, -male_con_y1/2, -plate_height/2 ] ) 
+	difference() {
+		cube(size = [male_con_x, male_con_y1, plate_height], center = false);
+		translate( [ 0,male_con_y1,-1 ] )
+		rotate([0, 0, -angle])
+		cube(male_con_x*2);
+		translate( [ 0,-male_con_x*2,-1 ] )
+		rotate([0, 0, angle])
+		cube(male_con_x*2);
 	}
 
 	//Cards for reference
