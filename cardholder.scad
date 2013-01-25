@@ -5,8 +5,8 @@
 card_x = 54; //original 54
 card_y = 80; //original 80
 card_space = 2; //original 2
-wall_thickness = 2; //original 2
-plate_height = 2; //original 2
+wall_thickness = 3; //original 2
+plate_height = 3; //original 2
 wall_height = 12; //original 12
 shortwall_cut = card_x/(card_y/card_x);
 shortwall = (card_x-shortwall_cut)/2+wall_thickness+card_space/2;
@@ -24,6 +24,8 @@ male_con_y2 = 10.46;
 angle = atan( ((female_con_y1-female_con_y2)/2) / female_con_x ); // same for both
 
 
+	
+
 union() {
 
 	difference() {
@@ -36,6 +38,23 @@ union() {
 		translate([0,-card_y/1.27,-card_x/4])
 		cylinder(card_x/2, card_x/2, card_x/2, $fa=2);
 		
+		//Logo
+		union() {
+			translate([0, -4.5, 0])
+			cube(size = [19,9,10], center = true);
+			difference() {
+				translate([-4.5, 0.5 ,0])
+				cube(size = [10,19,10], center = true);
+				translate([0.5, 12 ,0])
+				rotate([0, 0, 45])
+				cube(size = [10,12,11], center = true);
+				translate([-9.5, 12 ,0])
+				rotate([0, 0, 45])
+				cube(size = [12,10,11], center = true);
+			}
+		}
+	
+
 		//female con
 		translate( [ (card_x/2) - female_con_x + card_space/2 + wall_thickness +0.01 , -female_con_y1/2, -plate_height ] ) //0.01 is for overlapping
 		difference() {
